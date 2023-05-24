@@ -1,3 +1,5 @@
+import {log} from "util";
+
 console.log('lesson 2');
 
 // Lexical environment
@@ -21,10 +23,21 @@ console.log('lesson 2');
 // https://www.youtube.com/watch?v=Kuq6oIN3PH0
 
 
-// Task 01
+// Task 01 OK
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
-// Task 02
+function sum(a: number) {
+    let currentSum = a;
+
+    function f(b: number) {
+        currentSum += b;
+        return currentSum
+    }
+    return f
+}
+console.log("Task 01: " + sum(1)(6))
+
+// Task 02 OK
 // Реализовать функцию makeCounter которая работает следующим образом:
 // const counter = makeCounter();
 // counter(); // 1
@@ -33,6 +46,22 @@ console.log('lesson 2');
 // counter2(); // 1
 // counter(); // 3
 
+function makeCounter() {
+    let counter = 1;
+    return function() {
+        return counter++
+    };
+}
+
+console.log("Task 02:")
+const counter = makeCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+const counter2 = makeCounter();
+console.log(counter2()); // 1
+console.log(counter()); // 3
+
+
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
@@ -40,6 +69,8 @@ console.log('lesson 2');
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
