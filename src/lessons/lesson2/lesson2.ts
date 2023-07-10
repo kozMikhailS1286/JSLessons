@@ -62,7 +62,7 @@ console.log(counter2()); // 1
 console.log(counter()); // 3
 
 
-// Task 03
+// Task 03 OK
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
 // increase: +1
@@ -71,8 +71,25 @@ console.log(counter()); // 3
 // set: установить счетчик в заданное значение;
 
 
+console.log("Task 03:")
+function makeCounterPlus(num: any, method: string) {
+    if (method === "increase") {
+        num++;
+    } else if (method === "decrease") {
+        num--;
+    } else if (method === "reset") {
+        num = 0;
+    } else {
+        return counter
+    }
+    return num;
+}
 
-// Task 04*
+console.log(makeCounterPlus(2, "reset"))
+
+
+
+// Task 04* Не заработала.
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
 // и что бы корректно работали следующие вызовы:
 // 1) superSum(0) //0
@@ -83,6 +100,40 @@ console.log(counter()); // 3
 // 6) superSum(3)(2,5)(3,9) //10
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
+
+console.log("Task 04:")
+
+function superSum(n:number) {
+    if (n === 0) return 0;
+    if (n === 1) return (num: number) => num;
+
+    let _arguments: number[] = [];
+
+    function helper(...args: number[]) {
+        _arguments = [..._arguments, ...args];
+        if(_arguments.length >= n) {
+            _arguments.length = n;
+            return _arguments.reduce((acc, number) => acc + number)
+        } else {
+            return helper;
+        }
+    }
+    return helper;
+}
+
+
+superSum(0) //0
+// @ts-ignore
+superSum(3)(2)(5)(3) //10
+// @ts-ignore
+superSum(3)(2)(5,3) //10
+// @ts-ignore
+superSum(3)(2,5,3) //10
+// @ts-ignore
+superSum(3)(2,5)(3) //10
+// @ts-ignore
+superSum(3)(2,5)(3,9) //10
+
 
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
